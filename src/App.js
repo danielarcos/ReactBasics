@@ -3,15 +3,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Main from './components/MainComponent';
 
-class App extends Component {
-
-  render () {
-    return (
-      <div>
-        <Main />
-      </div>
-    );
-  };
+const App = () =>  {
+  return (
+    <div>
+      <Main />
+    </div>
+  );
 }
 
 export default App;
