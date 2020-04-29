@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import { BrowserRouter } from 'react-router-dom';
 import Main from './components/MainComponent';
 
 const App = () =>  {
   return (
-    <div>
-      <Main />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Main />
+      </div>
+    </BrowserRouter>
   );
 }
 
