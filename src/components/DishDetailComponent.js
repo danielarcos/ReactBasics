@@ -1,6 +1,7 @@
 import React from 'react';
-import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody, Media, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import CommentForm from './CommentFormComponent'
 
 function RenderDish({dish}) {
     return(
@@ -17,17 +18,17 @@ function RenderDish({dish}) {
 function RenderComments ({comments}) {
     const cardComment = comments.map((comment) => {
         return(
-            <CardBody>
-                <CardTitle>
-                    {comment.author}, 
-                    {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}
-                </CardTitle>
-                <CardText>{comment.comment}</CardText>
-            </CardBody>
+            <Media tag="li">
+                <Media body>
+                    <Media heading>{comment.author}</Media>
+                    <p>{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
+                    <p>{comment.comment}</p>
+                </Media>
+            </Media>
         );
     });
 
-    return (<Card>{cardComment}</Card>)
+    return (<Media list>{cardComment}</Media>)
 };
 
 const DishDetail = (props) => {
@@ -50,6 +51,7 @@ const DishDetail = (props) => {
                 </div>
                 <div class="col-12 col-md-5 m-1">
                     <RenderComments comments={props.comments}/>
+                    <CommentForm />
                 </div>
             </div>
         </div>
