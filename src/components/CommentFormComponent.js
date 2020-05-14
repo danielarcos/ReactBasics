@@ -31,8 +31,10 @@ class CommentForm extends Component {
     }
 
     handleSubmit(values) {
-        console.log('Current Values are: ' + JSON.stringify(values));
-        alert('Current Values are: ' + JSON.stringify(values));
+        // console.log(this.props)
+        this.props.addComment(this.props.dishId, values.rating, values.name, values.comment);
+        // console.log('Current Values are: ' + JSON.stringify(values));
+        // alert('Current Values are: ' + JSON.stringify(values));
         this.toggleModal();
     }
 
