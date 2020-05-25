@@ -4,33 +4,42 @@ import { Link } from 'react-router-dom';
 import CommentForm from './CommentFormComponent'
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 function RenderDish({dish}) {
     return(
-        <Card>
-            <CardImg top src={baseUrl + dish.image} alt={dish.name} />
-            <CardBody>
-                <CardTitle>{dish.name}</CardTitle>
-                <CardText>{dish.description}</CardText>
-            </CardBody>
-        </Card>
+        <FadeTransform
+            in
+            transformProps={{
+                exitTransform: 'scale(0.5) translateY(-50%)'
+            }}>
+            <Card>
+                <CardImg top src={baseUrl + dish.image} alt={dish.name} />
+                <CardBody>
+                    <CardTitle>{dish.name}</CardTitle>
+                    <CardText>{dish.description}</CardText>
+                </CardBody>
+            </Card>
+        </FadeTransform>
     );
 };
 
 function RenderComments ({comments}) {
     const cardComment = comments.map((comment) => {
         return(
-            <Media tag="li">
-                <Media body>
-                    <Media heading>{comment.author}</Media>
-                    <p>{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
-                    <p>{comment.comment}</p>
+            <Fade in>
+                <Media tag="li">
+                    <Media body>
+                        <Media heading>{comment.author}</Media>
+                        <p>{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
+                        <p>{comment.comment}</p>
+                    </Media>
                 </Media>
-            </Media>
+            </Fade>
         );
     });
 
-    return (<Media list>{cardComment}</Media>)
+    return (<Media list><Stagger in>{cardComment}</Stagger></Media>)
 };
 
 const DishDetail = (props) => {
